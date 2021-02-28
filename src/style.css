@@ -1,3 +1,7 @@
 footer {
   color: red;
 }
+
+label[for^="inputSubmit"] {
+  color: red;
+}

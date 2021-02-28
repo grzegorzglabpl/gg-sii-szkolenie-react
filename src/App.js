@@ -12,11 +12,17 @@ const Header = props => {
 };
 
 const Nav = () => {
-  return <nav>nawigacja</nav>;
+  return (
+    <nav>
+      <a href="/aktualnosci">aktualnosci</a>
+      <a href="/kontakt">kontakt</a>
+    </nav>
+  );
 };
 
 const Main = () => {
-  return <main>kontent</main>;
+  const routeResult = useRoutes(Routers);
+  return <main>{routeResult}</main>;
 };
 
 const Aside = () => {
@@ -36,13 +42,11 @@ const Footer = props => {
 
 export default () => {
   
-  const routeResult = useRoutes(Routers);
-
   return (
     <>
       <Header id="header-1" title="tytul" messsage="wiadomosc" />
       <Nav />
-      {routeResult}
+      <Main />
       <Aside />
       <Footer wyswietlRok={true} rok="2021" autor="Grzesiek" />
     </>
