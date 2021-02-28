@@ -1,11 +1,15 @@
 import { useReducer } from "react";
 
 const initialState = {
-  clickSubmit: true
+  clickSubmit: false,
+  kontaktImie: "Janinina",
+  kontaktNazwisko: "Kowalsky"
 };
 
 const actions = {
-  CLICK_SUBMIT: "CLICK_SUBMIT"
+  CLICK_SUBMIT: "CLICK_SUBMIT",
+  CHANGE_CONTACT_IMIE: "CHANGE_CONTACT_IMIE",
+  CHANGE_CONTACT_NAZWISKO: "CHANGE_CONTACT_NAZWISKO"
 };
 
 const reducer = (state, action) => {
@@ -14,6 +18,18 @@ const reducer = (state, action) => {
       return {
         ...state,
         clickSubmit: !state.clickSubmit
+      };
+
+    case actions.CHANGE_CONTACT_IMIE:
+      return {
+        ...state,
+        kontaktImie: actions.payload
+      };
+
+    case actions.CHANGE_CONTACT_NAZWISKO:
+      return {
+        ...state,
+        kontaktNazwisko: actions.payload
       };
 
     default:
@@ -26,13 +42,29 @@ export const useFormularz = () => {
 
   const onClickSubmit = event => {
     event.preventDefault();
-    console.log("click submit");
+    console.log("useFormulalrz: click submit");
     dispatch({ type: actions.CLICK_SUBMIT, payload: event });
+  };
+
+  const onChangeKontakt = event => {
+    event.preventDefault();
+    console.log("useFormulalrz: click onChangeKontakt");
+    const wartosc = event.currentTarget.value;
+    const nazwa = event.currentTarget.name;
+
+    console.log(nazwa);
+
+    if (nazwa == "kontaktImie") {
+      dispatch({ type: actions.CHANGE_CONTACT_IMIE, payload: wartosc });
+    } else if (nazwa == "kontaktNazwisko") {
+      dispatch({ type: actions.CHANGE_CONTACT_NAZWISKO, payload: wartosc });
+    }
   };
 
   return {
     ...state,
-    onClickSubmit
+    onClickSubmit,
+    onChangeKontakt
   };
 };
 

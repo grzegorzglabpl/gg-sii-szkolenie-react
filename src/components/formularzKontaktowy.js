@@ -5,8 +5,6 @@ import "./formularzKontaktowy.css";
 const FormularzKontaktowy = () => {
   const formularzHook = Hooks.useFormularz();
 
-  const [kontaktImie, setKontaktImie] = useState("Janina");
-  const [kontaktNazwisko, setKontaktNazwisko] = useState("Kowalsky");
   const [kontaktAdresEmai, setKontaktAdresEmail] = useState(
     "jan.kowalsky@kowalsky.pl"
   );
@@ -26,14 +24,6 @@ const FormularzKontaktowy = () => {
     const nazwa = event.currentTarget.name;
 
     switch (nazwa) {
-      case "kontaktImie":
-        setKontaktImie(wartosc);
-        break;
-
-      case "kontaktNazwisko":
-        setKontaktNazwisko(wartosc);
-        break;
-
       case "kontaktAdresEmai":
         setKontaktAdresEmail(wartosc);
         break;
@@ -74,16 +64,16 @@ const FormularzKontaktowy = () => {
           type="text"
           name="kontaktImie"
           required
-          value={kontaktImie}
-          onChange={handlerOnChangeKontakt}
+          value={formularzHook.kontaktImie}
+          onChange={formularzHook.onChangeKontakt}
         />
         <label>Nazwisko:</label>
         <input
           type="text"
           name="kontaktNazwisko"
           required
-          value={kontaktNazwisko}
-          onChange={handlerOnChangeKontakt}
+          value={formularzHook.kontaktNazwisko}
+          onChange={formularzHook.onChangeKontakt}
         />
         <label>adres email:</label>
         <input
@@ -165,7 +155,14 @@ const FormularzKontaktowy = () => {
           onChange={handlerOnChangeKontakt}
         />
       </fieldset>
-      <button type="submit">Wyslij formularz kontaktowy</button>
+      {!formularzHook.clickSubmit ? (
+        <button type="submit">Wyslij formularz kontaktowy</button>
+      ) : (
+        <>
+          <h1>Formularz zostal wyslany</h1>
+          <a href="/aktualnosci">Wroc do strony glownej</a>
+        </>
+      )}
     </form>
   );
 };
