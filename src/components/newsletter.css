@@ -1,3 +1,43 @@
-.Newsletter  {
-  
+.Newsletter * {
+  display: block;
+  margin-top: 0.5rem;
+}
+
+.Newsletter fieldset {
+  border: 1px solid gray;
+  border-radius: 5px;
+}
+
+.Newsletter legend {
+  font-size: 1.2rem;
+  font-weight: 200;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: gray;
+}
+
+.Newsletter label::after {
+  content: " (*)";
+  color: red;
+}
+
+.Newsletter input[type="email"] {
+  line-height: 2rem;
+  width: 50%;
+}
+
+.Newsletter input[type="email"]:invalid {
+  border: 1px solid red;
+}
+
+.Newsletter input[type="email"]:valid {
+  background-color: green;
+  color: white;
+  border: 1px solid yellowgreen;
+}
+
+.Newsletter button {
+  padding: 1rem;
+  border-radius: 5px;
+  border: 1px solid gray;
 }
