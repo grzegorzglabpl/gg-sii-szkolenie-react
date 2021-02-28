@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import Hooks from "../hooks";
 import "./formularzKontaktowy.css";
 
 const FormularzKontaktowy = () => {
+  const formularzHook = Hooks.useFormularz();
+
   const [kontaktImie, setKontaktImie] = useState("Janina");
   const [kontaktNazwisko, setKontaktNazwisko] = useState("Kowalsky");
   const [kontaktAdresEmai, setKontaktAdresEmail] = useState(
@@ -11,6 +14,10 @@ const FormularzKontaktowy = () => {
   const [kontaktPlec, setKontaktPlec] = useState("Kobieta");
   const [kontaktZgodyMarketingowe, setKontaktZgodyMarketingowe] = useState("");
   const [kontaktZgodaRODO, setKontaktZgodaRODO] = useState("nie");
+
+  const handlerOnSubmitKontakt = event => {
+    event.preventDefault();
+  };
 
   const handlerOnChangeKontakt = event => {
     event.preventDefault();
@@ -40,7 +47,12 @@ const FormularzKontaktowy = () => {
         break;
 
       case "kontaktZgodyMarketingowe":
-        setKontaktZgodyMarketingowe(wartosc);
+        if (!kontaktZgodyMarketingowe.includes(wartosc)) {
+          setKontaktZgodyMarketingowe(kontaktZgodyMarketingowe + wartosc);
+        } else {
+          kontaktZgodyMarketingowe.replace(wartosc, "");
+        }
+
         break;
 
       case "kontaktZgodaRODO":
@@ -50,7 +62,10 @@ const FormularzKontaktowy = () => {
   };
 
   return (
-    <form className="formularzKontaktowy">
+    <form
+      className="formularzKontaktowy"
+      onSubmit={formularzHook.onClickSubmit}
+    >
       <h1>Formularz Kontaktowy</h1>
       <fieldset>
         <legend>Dane kontaktowe</legend>
@@ -92,7 +107,7 @@ const FormularzKontaktowy = () => {
           type="radio"
           value="Kobieta"
           name="kontaktPlec"
-          checked
+          checked={kontaktPlec.includes("Kobieta")}
           onChange={handlerOnChangeKontakt}
         />
         <label>Mezczyzna:</label>
@@ -100,6 +115,7 @@ const FormularzKontaktowy = () => {
           type="radio"
           value="Mezyczyzna"
           name="kontaktPlec"
+          checked={kontaktPlec.includes("Mezyczyzna")}
           onChange={handlerOnChangeKontakt}
         />
       </fieldset>
@@ -111,6 +127,11 @@ const FormularzKontaktowy = () => {
           name="kontaktZgodyMarketingowe"
           value="zgodaMarketingTelefoniczny"
           onChange={handlerOnChangeKontakt}
+          checked={
+            kontaktZgodyMarketingowe.includes("zgodaMarketingTelefoniczny")
+              ? true
+              : false
+          }
         />
         <label>zgoda na marketeting email</label>
         <input
@@ -118,6 +139,11 @@ const FormularzKontaktowy = () => {
           name="kontaktZgodyMarketingowe"
           value="zgodaMarketingEmail"
           onChange={handlerOnChangeKontakt}
+          checked={
+            kontaktZgodyMarketingowe.includes("zgodaMarketingEmail")
+              ? true
+              : false
+          }
         />
       </fieldset>
       <fieldset>
@@ -127,7 +153,7 @@ const FormularzKontaktowy = () => {
           type="radio"
           value="nie"
           name="kontaktZgodaRODO"
-          checked
+          checked={kontaktZgodaRODO.includes("nie")}
           onChange={handlerOnChangeKontakt}
         />
         <label>TAK:</label>
@@ -135,6 +161,7 @@ const FormularzKontaktowy = () => {
           type="radio"
           value="tak"
           name="kontaktZgodaRODO"
+          checked={kontaktZgodaRODO.includes("tak")}
           onChange={handlerOnChangeKontakt}
         />
       </fieldset>
