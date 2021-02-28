@@ -1,47 +1,142 @@
-import React from "react";
+import React, { useState } from "react";
 import "./formularzKontaktowy.css";
 
 const FormularzKontaktowy = () => {
+  const [kontaktImie, setKontaktImie] = useState("Janina");
+  const [kontaktNazwisko, setKontaktNazwisko] = useState("Kowalsky");
+  const [kontaktAdresEmai, setKontaktAdresEmail] = useState(
+    "jan.kowalsky@kowalsky.pl"
+  );
+  const [kontaktTelefon, setKontaktTelefon] = useState("+48.123-456-789");
+  const [kontaktPlec, setKontaktPlec] = useState("Kobieta");
+  const [kontaktZgodyMarketingowe, setKontaktZgodyMarketingowe] = useState("");
+  const [kontaktZgodaRODO, setKontaktZgodaRODO] = useState("nie");
+
+  const handlerOnChangeKontakt = event => {
+    event.preventDefault();
+
+    const wartosc = event.currentTarget.value;
+    const nazwa = event.currentTarget.name;
+
+    switch (nazwa) {
+      case "kontaktImie":
+        setKontaktImie(wartosc);
+        break;
+
+      case "kontaktNazwisko":
+        setKontaktNazwisko(wartosc);
+        break;
+
+      case "kontaktAdresEmai":
+        setKontaktAdresEmail(wartosc);
+        break;
+
+      case "kontaktTelefon":
+        setKontaktTelefon(wartosc);
+        break;
+
+      case "kontaktPlec":
+        setKontaktPlec(wartosc);
+        break;
+
+      case "kontaktZgodyMarketingowe":
+        setKontaktZgodyMarketingowe(wartosc);
+        break;
+
+      case "kontaktZgodaRODO":
+        setKontaktZgodaRODO(wartosc);
+        break;
+    }
+  };
+
   return (
     <form className="formularzKontaktowy">
       <h1>Formularz Kontaktowy</h1>
       <fieldset>
         <legend>Dane kontaktowe</legend>
         <label>Imie:</label>
-        <input type="text" name="imie" required />
+        <input
+          type="text"
+          name="kontaktImie"
+          required
+          value={kontaktImie}
+          onChange={handlerOnChangeKontakt}
+        />
         <label>Nazwisko:</label>
-        <input type="text" name="nazwisko" required />
+        <input
+          type="text"
+          name="kontaktNazwisko"
+          required
+          value={kontaktNazwisko}
+          onChange={handlerOnChangeKontakt}
+        />
         <label>adres email:</label>
-        <input type="text" name="emai" required />
+        <input
+          type="text"
+          name="kontaktAdresEmai"
+          required
+          value={kontaktAdresEmai}
+          onChange={handlerOnChangeKontakt}
+        />
         <label>telefon:</label>
-        <input type="text" name="telefon" required />
+        <input
+          type="text"
+          name="kontaktTelefon"
+          required
+          value={kontaktTelefon}
+          onChange={handlerOnChangeKontakt}
+        />
         <label>Plec:</label>
         <label>Kobieta:</label>
-        <input type="radio" value="Kobieta" name="plec" checked />
+        <input
+          type="radio"
+          value="Kobieta"
+          name="kontaktPlec"
+          checked
+          onChange={handlerOnChangeKontakt}
+        />
         <label>Mezczyzna:</label>
-        <input type="radio" value="Mezyczyzna" name="plec" />
+        <input
+          type="radio"
+          value="Mezyczyzna"
+          name="kontaktPlec"
+          onChange={handlerOnChangeKontakt}
+        />
       </fieldset>
       <fieldset>
         <legend>Zgody maketingowe</legend>
         <label>zgoda na marketing telefoniczny</label>
         <input
           type="checkbox"
-          name="zgodaMarketing"
+          name="kontaktZgodyMarketingowe"
           value="zgodaMarketingTelefoniczny"
+          onChange={handlerOnChangeKontakt}
         />
         <label>zgoda na marketeting email</label>
         <input
           type="checkbox"
-          name="zgodaMarketing"
+          name="kontaktZgodyMarketingowe"
           value="zgodaMarketingEmail"
+          onChange={handlerOnChangeKontakt}
         />
       </fieldset>
       <fieldset>
         <legend>Zgoda na przetwarzanie danych RODO:</legend>
         <label>NIE:</label>
-        <input type="radio" value="nie" name="rodo" checked />
+        <input
+          type="radio"
+          value="nie"
+          name="kontaktZgodaRODO"
+          checked
+          onChange={handlerOnChangeKontakt}
+        />
         <label>TAK:</label>
-        <input type="radio" value="tak" name="rodo" />
+        <input
+          type="radio"
+          value="tak"
+          name="kontaktZgodaRODO"
+          onChange={handlerOnChangeKontakt}
+        />
       </fieldset>
       <button type="submit">Wyslij formularz kontaktowy</button>
     </form>
