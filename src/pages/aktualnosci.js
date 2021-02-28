@@ -7,7 +7,6 @@ const Aktualnosci = () => {
       <section>
         <h1>Aktualnosci</h1>
       </section>
-      <Components.FormularzKontaktowy />
       <Components.Newsletter />
     </>
   );
