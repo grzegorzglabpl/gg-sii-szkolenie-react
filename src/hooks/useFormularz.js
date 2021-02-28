@@ -13,6 +13,11 @@ const actions = {
 };
 
 const reducer = (state, action) => {
+  /*
+  window.sessionStorage.setItem("useFormularz2", JSON.stringify(state));
+  initialState = JSON.parse(window.sessionStorage.getItem(useFormularz2));
+*/
+
   switch (action.type) {
     case actions.CLICK_SUBMIT:
       return {
@@ -40,8 +45,17 @@ const reducer = (state, action) => {
 export const useFormularz = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const getValidEmail = async () => {
+    let response = await fetch("dane.json");
+    let jsonData = await response.json();
+    console.log(jsonData);
+  };
+
   const onClickSubmit = event => {
     event.preventDefault();
+
+    getValidEmail();
+
     console.log("useFormulalrz: click submit");
     dispatch({ type: actions.CLICK_SUBMIT, payload: event });
   };
